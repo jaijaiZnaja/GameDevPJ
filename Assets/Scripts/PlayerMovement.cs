@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private float horizontalInput;
     private float speed = 8f;
-    private float jumpForce = 5f;
+    [SerializeField] private float jumpForce = 5f;
     private bool isFacingRight = true;
 
     [SerializeField] private Rigidbody2D rb;
@@ -21,10 +21,12 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
 
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f()()()()()()()()()())
+        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
+
+        Flip();
     }
 
     private void FixedUpdate()
