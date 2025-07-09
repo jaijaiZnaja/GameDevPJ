@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class ItemPickup : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public ItemData itemToPickup; // Assign an ItemData asset in the Inspector
+        public int amountToPickup = 1;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                bool success = InventoryManager.Instance.AddItem(itemToPickup, amountToPickup);
+                if (success)
+                {
+                    Debug.Log($"Picked up {itemToPickup.itemName}");
+                    // Destroy the pickup object after it's collected.
+                    Destroy(gameObject);
+                }
+            }
+        }
 }
