@@ -6,8 +6,18 @@ using TMPro;
 
 public class UI_InventorySlot : MonoBehaviour
 {
+    [Header("UI Elements")]
     [SerializeField] public Image icon;
     [SerializeField] public TextMeshProUGUI quantityText;
+    [SerializeField] public GameObject selector;
+
+    private void Awake()
+    {
+        if (selector != null)
+        {
+            selector.SetActive(false);
+        }
+    }
 
     public void UpdateSlot(InventorySlot slot)
     {
@@ -33,6 +43,16 @@ public class UI_InventorySlot : MonoBehaviour
             icon.sprite = null;
             icon.enabled = false;
             quantityText.enabled = false;
+        }
+    }
+
+    //select visibility
+
+    public void SetSelected(bool isSelected)
+    {
+        if (selector != null)
+        {
+            selector.SetActive(isSelected);
         }
     }
 
