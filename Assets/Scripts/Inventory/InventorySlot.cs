@@ -14,9 +14,6 @@ public class InventorySlot : MonoBehaviour
         quantity = amount;
     }
 
-    /// <summary>
-    /// Adds a specified amount to the slot's quantity.
-    /// </summary>
     public void AddQuantity(int amount)
     {
         quantity += amount;
