@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class InventorySlot : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public ItemData itemData;
+    public int quantity;
+
+    public InventorySlot(ItemData data, int amount)
     {
-        
+        itemData = data;
+        quantity = amount;
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// Adds a specified amount to the slot's quantity.
+    /// </summary>
+    public void AddQuantity(int amount)
     {
-        
+        quantity += amount;
     }
 }

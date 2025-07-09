@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New ItemData", menuName = "Inventory/Item Data")]
 public class ItemData : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Item Information")]
+    public string itemName;
+    public Sprite icon;
+    [TextArea(4, 8)]
+    public string description;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("Stacking Information")]
+    public int maxStackSize = 1;
 }
