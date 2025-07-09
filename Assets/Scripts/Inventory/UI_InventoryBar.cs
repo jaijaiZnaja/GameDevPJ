@@ -37,7 +37,7 @@ public class UI_InventoryBar : MonoBehaviour
 
     private void HandleSlotSelectionInput()
     {
-        // --- ใช้ Scroll Wheel ---
+        //Scroll Wheel
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (scroll != 0)
         {
@@ -49,32 +49,27 @@ public class UI_InventoryBar : MonoBehaviour
             UpdateSelectionVisuals();
         }
 
-        // --- ใช้ปุ่มตัวเลข 1-0 ---
+        // number 1-0
         for (int i = 0; i < slotsToDisplay; i++)
         {
-            // KeyCode.Alpha1 คือเลข 1, KeyCode.Alpha0 คือเลข 0
             if (Input.GetKeyDown(KeyCode.Alpha1 + i))
             {
-                // แปลงให้เลข 0 อยู่ที่ index 9
                 selectedSlotIndex = (i + 1) % 10 == 0 ? 9 : i;
                 UpdateSelectionVisuals();
-                return; // ออกจากฟังก์ชันเมื่อเจอการกดปุ่ม
+                return; 
             }
         }
     }
 
     private void HandleUseItemInput()
     {
-        // กดคลิกซ้ายเพื่อ "ใช้" ไอเทม
+        // use items
         if (Input.GetMouseButtonDown(0))
         {
-            // ดึงข้อมูลไอเทมจากช่องที่เลือก
             InventorySlot slotData = InventoryManager.Instance.inventorySlots[selectedSlotIndex];
             if (slotData.itemData != null)
             {
-                // ในอนาคตจะเปลี่ยนเป็น Logic การใช้ของจริงๆ
                 Debug.Log($"Used item: {slotData.itemData.itemName}");
-                // ตัวอย่าง: inventoryManager.UseItem(selectedSlotIndex);
             }
             else
             {
