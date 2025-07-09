@@ -35,6 +35,8 @@ public class InventoryManager : MonoBehaviour
 
     public bool AddItem(ItemData itemToAdd, int amount)
     {
+        bool itemAddedSuccessfully = false;
+        int originalAmount = amount;
 
         foreach (InventorySlot slot in inventorySlots)
         {
@@ -45,12 +47,11 @@ public class InventoryManager : MonoBehaviour
 
                 slot.AddQuantity(amountToAdd);
                 amount -= amountToAdd;
+                itemAddedSuccessfully = true;
 
                 if (amount <= 0)
                 {
-                    Debug.Log($"Added {amountToAdd} {itemToAdd.itemName} to an existing stack.");
-                    OnInventoryChanged?.Invoke(); // Notify
-                    return true;
+                    break;
                 }
             }
         }
@@ -66,24 +67,30 @@ public class InventoryManager : MonoBehaviour
                     slot.itemData = itemToAdd;
                     slot.quantity = amountToAdd;
                     amount -= amountToAdd;
+                    itemAddedSuccessfully = true;
                     
                     Debug.Log($"Added {amountToAdd} {itemToAdd.itemName} to a new slot.");
                     if (amount <= 0)
                     {
-                        OnInventoryChanged?.Invoke(); // Notify 
+                        break;
                     }
                 }
             }
         }
 
+        if (itemAddedSuccessfully)
+        {
+            Debug.Log($"Successfully added {originalAmount - amount} of {itemToAdd.itemName}.");
+            OnInventoryChanged?.Invoke(); // Notify listeners that the inventory changed
+        }
+
         //inventory is full.
         if (amount > 0)
         {
-            Debug.LogWarning($"Inventory is full! Could not add {amount} of {itemToAdd.itemName}.");
-            OnInventoryChanged?.Invoke(); // Still invoke lol
-            return false;
+            Debug.LogWarning($"Inventory is full! Could not add the remaining {amount} of {itemToAdd.itemName}.");
+
         }
 
-        return true;
+        return itemAddedSuccessfully;;
     }
 }
