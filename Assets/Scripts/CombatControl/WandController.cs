@@ -9,15 +9,18 @@ public class WandController : MonoBehaviour
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform firePoint;
     [SerializeField] private float fireRate = 0.5f;
+    [SerializeField] private int mpCost = 10;
 
     private float nextFireTime = 0f;
     private UI_InventoryBar inventoryBar;
     private PlayerMovement playerMovement;
+    private ManaSystem manaSystem;
 
     void Start()
     {
         inventoryBar = FindObjectOfType<UI_InventoryBar>();
         playerMovement = GetComponent<PlayerMovement>();
+        manaSystem = GetComponent<ManaSystem>();
     }
     
     void Update()
@@ -31,8 +34,11 @@ public class WandController : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Shoot();
-                nextFireTime = Time.time + fireRate; 
+                if (manaSystem.UseMP(mpCost))
+                {
+                    Shoot();
+                    nextFireTime = Time.time + fireRate;
+                }
             }
         }
     }

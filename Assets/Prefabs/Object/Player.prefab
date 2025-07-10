@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 9038364546184110280}
   - component: {fileID: 7253009913883659197}
   - component: {fileID: 6373118803972309641}
+  - component: {fileID: 3677917949118107722}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -230,6 +231,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 4155249016705566455, guid: 49a635d76c18c754d891d72faac4024d, type: 3}
   firePoint: {fileID: 1753942100744448501}
   fireRate: 0.5
+  mpCost: 10
 --- !u!114 &6373118803972309641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,6 +249,22 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3677917949118107722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947967945561999555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 590b759fb90cb654588f1f13eced44a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxMP: 100
+  OnMPChanged:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &1295993870587082232
