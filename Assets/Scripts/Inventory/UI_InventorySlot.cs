@@ -54,10 +54,12 @@ public class UI_InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (InventoryManager.Instance.inventorySlots[SlotIndex].itemData != null && eventData.button == PointerEventData.InputButton.Left)
+        if (InventoryManager.Instance.inventorySlots[SlotIndex].itemData != null && 
+            UI_Manager.Instance != null && UI_Manager.Instance.IsUIOpen &&
+            eventData.button == PointerEventData.InputButton.Left)
         {
-            DragItem.Instance.ShowIcon(icon.sprite); // แสดงไอเทมที่กำลังลาก
-            icon.enabled = false; // ซ่อนไอคอนที่ช่องเดิม
+            DragItem.Instance.ShowIcon(icon.sprite); 
+            icon.enabled = false;
             quantityText.enabled = false;
         }
     }
@@ -70,7 +72,10 @@ public class UI_InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     public void OnEndDrag(PointerEventData eventData)
     {
         DragItem.Instance.HideIcon(); 
-        UpdateSlot(InventoryManager.Instance.inventorySlots[SlotIndex]); 
+        if(InventoryManager.Instance.inventorySlots[SlotIndex].itemData != null)
+        {
+             UpdateSlot(InventoryManager.Instance.inventorySlots[SlotIndex]);
+        }
     }
 
     public void OnDrop(PointerEventData eventData)

@@ -23,8 +23,10 @@ public class UI_InventoryBar : MonoBehaviour
 
     private void Update()
     {
+        if (UI_Manager.Instance != null && UI_Manager.Instance.IsUIOpen)
+        return;
+        
         HandleSlotSelectionInput();
-        HandleUseItemInput();
     }
 
     private void OnDestroy()
@@ -34,46 +36,35 @@ public class UI_InventoryBar : MonoBehaviour
             InventoryManager.Instance.OnInventoryChanged.RemoveListener(Redraw);
         }
     }
+    public ItemData GetSelectedItemData()
+    {
+        if (selectedSlotIndex >= 0 && selectedSlotIndex < InventoryManager.Instance.inventorySlots.Count)
+        {
+            return InventoryManager.Instance.inventorySlots[selectedSlotIndex].itemData;
+        }
+        return null;
+    }
 
     private void HandleSlotSelectionInput()
     {
-        //Scroll Wheel
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (scroll != 0)
         {
             selectedSlotIndex -= (int)Mathf.Sign(scroll);
-
             if (selectedSlotIndex < 0) selectedSlotIndex = slotsToDisplay - 1;
             if (selectedSlotIndex >= slotsToDisplay) selectedSlotIndex = 0;
-            
             UpdateSelectionVisuals();
         }
 
-        // number 1-0
         for (int i = 0; i < slotsToDisplay; i++)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1 + i))
             {
-                selectedSlotIndex = (i + 1) % 10 == 0 ? 9 : i;
+                int keyNumber = (i + 1) % 10;
+                selectedSlotIndex = (keyNumber == 0) ? 9 : keyNumber - 1;
+                
                 UpdateSelectionVisuals();
                 return; 
-            }
-        }
-    }
-
-    private void HandleUseItemInput()
-    {
-        // use items
-        if (Input.GetMouseButtonDown(0))
-        {
-            InventorySlot slotData = InventoryManager.Instance.inventorySlots[selectedSlotIndex];
-            if (slotData.itemData != null)
-            {
-                Debug.Log($"Used item: {slotData.itemData.itemName}");
-            }
-            else
-            {
-                Debug.Log("Selected slot is empty.");
             }
         }
     }
@@ -85,9 +76,10 @@ public class UI_InventoryBar : MonoBehaviour
             uiSlots[i].SetSelected(i == selectedSlotIndex);
         }
     }
+
     private void CreateSlots()
     {
-        foreach (Transform child in slotContainer) 
+        foreach (Transform child in slotContainer)
         {
             Destroy(child.gameObject);
         }
@@ -97,11 +89,13 @@ public class UI_InventoryBar : MonoBehaviour
         {
             if (i < InventoryManager.Instance.inventorySlots.Count)
             {
-                GameObject newSlot = Instantiate(slotPrefab, slotContainer);
-                uiSlots.Add(newSlot.GetComponent<UI_InventorySlot>());
+                GameObject newSlotGO = Instantiate(slotPrefab, slotContainer);
+                UI_InventorySlot newSlot = newSlotGO.GetComponent<UI_InventorySlot>();
+                uiSlots.Add(newSlot);
             }
         }
     }
+
     public void Redraw()
     {
         for (int i = 0; i < uiSlots.Count; i++)
