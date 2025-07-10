@@ -37,28 +37,28 @@
 
 บันทึกการทำงาน (Work Log)
 Day 1 (8 ก.ค. 2568)
-(1.5h) Project Setup: สร้างโปรเจกต์ 2D, ตั้งค่า Git, สร้าง Player Controller พื้นฐาน (Movement & Jump)
-(1h) Time System: ออกแบบและสร้าง Enum สำหรับ TimePeriod และ DayOfWeek
-(1h) Time System: Implement TimeManager สำหรับจัดการ Logic การเปลี่ยนเวลาและวัน
-(1h) Time System: สร้าง TimeHopTrigger และ UI แสดงผลเวลาเบื้องต้น
-(1.5h) Inventory System: ออกแบบและสร้าง ItemData (ScriptableObject) และ InventorySlot
-(2h) Inventory System: Implement InventoryManager พร้อม Logic การเพิ่มและซ้อนไอเทม (Stacking)
+- (1.5h) Project Setup: สร้างโปรเจกต์ 2D, ตั้งค่า Git, สร้าง Player Controller พื้นฐาน (Movement & Jump)
+- (1h) Time System: ออกแบบและสร้าง Enum สำหรับ TimePeriod และ DayOfWeek
+- (1h) Time System: Implement TimeManager สำหรับจัดการ Logic การเปลี่ยนเวลาและวัน
+- (1h) Time System: สร้าง TimeHopTrigger และ UI แสดงผลเวลาเบื้องต้น
+- (1.5h) Inventory System: ออกแบบและสร้าง ItemData (ScriptableObject) และ InventorySlot
+- (2h) Inventory System: Implement InventoryManager พร้อม Logic การเพิ่มและซ้อนไอเทม (Stacking)
 
 Day 2 (9 ก.ค. 2568)
-(2.5h) Inventory System: สร้าง UI สำหรับ Inventory Bar (Hotbar) และ Prefab สำหรับ UI_Slot
-(1h) Inventory System: Implement Logic การเลือกช่องใน Hotbar ด้วย Scroll Wheel และปุ่มตัวเลข
-(2h) Inventory System: สร้าง UI สำหรับหน้าต่าง Inventory เต็มรูปแบบ (เปิด/ปิดด้วยปุ่ม E)
-(2.5h) Inventory System: Implement ระบบ Drag & Drop และระบบทิ้งของ (Drop Item)
-(1h) Debugging: แก้ไขปัญหาต่างๆ ที่เกี่ยวกับ UI และการเก็บของ
+- (2.5h) Inventory System: สร้าง UI สำหรับ Inventory Bar (Hotbar) และ Prefab สำหรับ UI_Slot
+- (1h) Inventory System: Implement Logic การเลือกช่องใน Hotbar ด้วย Scroll Wheel และปุ่มตัวเลข
+- (2h) Inventory System: สร้าง UI สำหรับหน้าต่าง Inventory เต็มรูปแบบ (เปิด/ปิดด้วยปุ่ม E)
+- (2.5h) Inventory System: Implement ระบบ Drag & Drop และระบบทิ้งของ (Drop Item)
+- (1h) Debugging: แก้ไขปัญหาต่างๆ ที่เกี่ยวกับ UI และการเก็บของ
 
 Day 3 (10 ก.ค. 2568)
-(1.5h) Combat System: สร้าง HealthSystem และ Projectile
-(2h) Combat System: สร้าง WandController และเชื่อมต่อ Logic การยิงเข้ากับ Hotbar
-(2.5h) Combat System: Implement SlimeAI พร้อมพฤติกรรมการไล่ตาม และ Logic การแตกตัวเมื่อตาย
-(1.5h) Combat System: สร้างระบบ ArcanePowerSystem และ UI แสดงผล
-(1h) Crafting System: สร้าง CraftingRecipe และ CraftingSystem
-(1.5h) Crafting System: สร้าง UI ปุ่ม Craft และเชื่อมต่อ Logic ทั้งหมด
-(1h) Finalization: ตรวจสอบความเรียบร้อยของระบบทั้งหมดและเขียนเอกสาร README.md
+- (1.5h) Combat System: สร้าง HealthSystem และ Projectile
+- (2h) Combat System: สร้าง WandController และเชื่อมต่อ Logic การยิงเข้ากับ Hotbar
+- (2.5h) Combat System: Implement SlimeAI พร้อมพฤติกรรมการไล่ตาม และ Logic การแตกตัวเมื่อตาย
+- (1.5h) Combat System: สร้างระบบ ArcanePowerSystem และ UI แสดงผล
+- (1h) Crafting System: สร้าง CraftingRecipe และ CraftingSystem
+- (1.5h) Crafting System: สร้าง UI ปุ่ม Craft และเชื่อมต่อ Logic ทั้งหมด
+- (1h) Finalization: ตรวจสอบความเรียบร้อยของระบบทั้งหมดและเขียนเอกสาร README.md
 
 
 ระบบที่ยังพัฒนาเสร็จสมบูรณ์หรือยังไม่ได้ทำ (Incomplete)
