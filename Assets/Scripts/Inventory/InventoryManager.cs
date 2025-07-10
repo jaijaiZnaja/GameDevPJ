@@ -100,8 +100,24 @@ public class InventoryManager : MonoBehaviour
         inventorySlots[indexB] = temp;
 
         Debug.Log($"Swapped items between slot {indexA} and {indexB}");
-        
+
         // New UI on swap
+        OnInventoryChanged?.Invoke();
+    }
+    
+    public void RemoveItem(int slotIndex, int amountToRemove)
+    {
+        if (slotIndex < 0 || slotIndex >= inventorySlots.Count) return;
+        InventorySlot slot = inventorySlots[slotIndex];
+        if (slot.itemData == null) return;
+        string itemName = slot.itemData.itemName;
+        slot.quantity -= amountToRemove;
+        if (slot.quantity <= 0)
+        {
+            slot.itemData = null;
+            slot.quantity = 0;
+        }        
+        Debug.Log($"Removed {amountToRemove} of {itemName} from slot {slotIndex}");
         OnInventoryChanged?.Invoke();
     }
 }

@@ -91,8 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8960748af62c3934ab728edf43f4a286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemToPickup: {fileID: 11400000, guid: dcb06472c740af64c9ebd88731ce0a80, type: 2}
-  amountToPickup: 1
+  itemData: {fileID: 11400000, guid: dcb06472c740af64c9ebd88731ce0a80, type: 2}
+  quantity: 1
 --- !u!61 &2209544646614096936
 BoxCollider2D:
   m_ObjectHideFlags: 0

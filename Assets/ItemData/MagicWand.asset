@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MagicWand
   m_EditorClassIdentifier: 
   itemName: MagicWand
-  icon: {fileID: 0}
+  icon: {fileID: 21300078, guid: 4b00c4fcb1be91245b2dab5149c61c5d, type: 3}
   description: MagicWand deal 3-5 damage to monster.
   maxStackSize: 1

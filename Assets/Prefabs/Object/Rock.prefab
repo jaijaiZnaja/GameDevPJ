@@ -197,8 +197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8960748af62c3934ab728edf43f4a286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemToPickup: {fileID: 11400000, guid: 7692be1334231084681da237358d4b12, type: 2}
-  amountToPickup: 1
+  itemData: {fileID: 11400000, guid: 7692be1334231084681da237358d4b12, type: 2}
+  quantity: 1
 --- !u!50 &3193408820650987629
 Rigidbody2D:
   serializedVersion: 4

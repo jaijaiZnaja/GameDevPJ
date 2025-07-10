@@ -2,22 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class ItemPickup : MonoBehaviour
 {
-    public ItemData itemToPickup; // Assign an ItemData asset in the Inspector
-        public int amountToPickup = 1;
+    [SerializeField] private ItemData itemData;
+    
+    [SerializeField] private int quantity = 1;
 
-        private void OnTriggerEnter2D(Collider2D other)
+    public void SetQuantity(int amount)
+    {
+        this.quantity = amount;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
         {
-            if (other.CompareTag("Player"))
+            if (itemData == null)
             {
-                bool success = InventoryManager.Instance.AddItem(itemToPickup, amountToPickup);
-                if (success)
-                {
-                    Debug.Log($"Picked up {itemToPickup.itemName}");
-                    // Destroy the pickup object after it's collected.
-                    Destroy(gameObject);
-                }
+                Debug.LogError($"ItemPickup on {gameObject.name} no item Data", this);
+                return;
+            }
+            bool success = InventoryManager.Instance.AddItem(itemData, quantity);
+            if (success)
+            {
+                Destroy(gameObject);
             }
         }
+    }
 }

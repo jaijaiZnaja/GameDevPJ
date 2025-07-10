@@ -13,4 +13,8 @@ public class ItemData : ScriptableObject
 
     [Header("Stacking Information")]
     public int maxStackSize = 1;
+
+    [Header("World Representation")] 
+    [Tooltip("DropPrefab")]
+    public GameObject pickupPrefab; 
 }

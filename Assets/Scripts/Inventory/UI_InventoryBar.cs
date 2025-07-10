@@ -12,9 +12,14 @@ public class UI_InventoryBar : MonoBehaviour
 
     private List<UI_InventorySlot> uiSlots = new List<UI_InventorySlot>();
     private int selectedSlotIndex = 0;
+    private PlayerMovement playerMovement;
+
+    [Header("Item Dropping")]
+    [SerializeField] private float dropDistance = 1.5f;
 
     private void Start()
     {
+        playerMovement = FindObjectOfType<PlayerMovement>();
         InventoryManager.Instance.OnInventoryChanged.AddListener(Redraw);
         CreateSlots();
         Redraw();
@@ -24,9 +29,10 @@ public class UI_InventoryBar : MonoBehaviour
     private void Update()
     {
         if (UI_Manager.Instance != null && UI_Manager.Instance.IsUIOpen)
-        return;
-        
+            return;
+
         HandleSlotSelectionInput();
+        HandleDropItemInput();
     }
 
     private void OnDestroy()
@@ -62,9 +68,9 @@ public class UI_InventoryBar : MonoBehaviour
             {
                 int keyNumber = (i + 1) % 10;
                 selectedSlotIndex = (keyNumber == 0) ? 9 : keyNumber - 1;
-                
+
                 UpdateSelectionVisuals();
-                return; 
+                return;
             }
         }
     }
@@ -101,6 +107,22 @@ public class UI_InventoryBar : MonoBehaviour
         for (int i = 0; i < uiSlots.Count; i++)
         {
             uiSlots[i].UpdateSlot(InventoryManager.Instance.inventorySlots[i]);
+        }
+    }
+    private void HandleDropItemInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            ItemData itemToDrop = GetSelectedItemData();
+
+            if (itemToDrop != null && itemToDrop.pickupPrefab != null)
+            {
+                Vector2 dropDirection = playerMovement.isFacingRight ? Vector2.right : Vector2.left;
+                Vector2 spawnPosition = (Vector2)playerMovement.transform.position + (dropDirection * dropDistance);
+                Instantiate(itemToDrop.pickupPrefab, spawnPosition, Quaternion.identity);
+            
+                InventoryManager.Instance.RemoveItem(selectedSlotIndex, 1);
+            }
         }
     }
 }
