@@ -16,7 +16,6 @@ public class EnemyAI : MonoBehaviour
     [Header("AI Settings")]
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float detectionRange = 8f;
-    [SerializeField] private float attackRange = 1.2f;
     [SerializeField] private int contactDamage = 10;
 
     [Header("Splitting")]
