@@ -42,7 +42,6 @@ public class WandController : MonoBehaviour
             }
         }
     }
-
     private void Shoot()
     {
         if (projectilePrefab == null || firePoint == null || playerMovement == null)

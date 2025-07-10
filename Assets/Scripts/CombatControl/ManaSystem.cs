@@ -16,7 +16,6 @@ public class ManaSystem : MonoBehaviour
         TimeManager.Instance.OnTimePeriodChanged.AddListener(RestoreFullMPWrapper);
         GetComponent<HealthSystem>().OnDeath.AddListener(RestoreFullMP);
     }
-
     private void OnDestroy()
     {
         if (TimeManager.Instance != null)
@@ -24,7 +23,6 @@ public class ManaSystem : MonoBehaviour
             TimeManager.Instance.OnTimePeriodChanged.RemoveListener(RestoreFullMPWrapper);
         }
     }
-
     public bool UseMP(int amount)
     {
         if (currentMP >= amount)
@@ -36,7 +34,7 @@ public class ManaSystem : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not enough Arcane Power!");
+            Debug.Log("Not enough Mana Power!");
             return false;
         }
     }
@@ -45,10 +43,9 @@ public class ManaSystem : MonoBehaviour
     {
         currentMP = maxMP;
         OnMPChanged?.Invoke(currentMP, maxMP);
-        Debug.Log("Arcane Power restored to full!");
+        Debug.Log("Mana Power restored to full!");
     }
 
-    // ฟังก์ชันตัวกลางสำหรับรับ Event จาก TimeManager ที่มี parameter ไม่ตรงกัน
     private void RestoreFullMPWrapper(TimePeriod period)
     {
         RestoreFullMP();
