@@ -16,3 +16,4 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 1e7514f2e427fd44394b3a5d872f1eaa, type: 3}
   description: Nature prophet
   maxStackSize: 20
+  pickupPrefab: {fileID: 6018176864037686953, guid: a735940baba770b4a867b17772464c51, type: 3}

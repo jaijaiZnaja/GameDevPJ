@@ -16,3 +16,4 @@ MonoBehaviour:
   icon: {fileID: 21300044, guid: 4b00c4fcb1be91245b2dab5149c61c5d, type: 3}
   description: Rock Solid!!
   maxStackSize: 20
+  pickupPrefab: {fileID: 6239337654585174795, guid: ae350a23195b48d4ead6dbde1514639b, type: 3}

@@ -16,3 +16,4 @@ MonoBehaviour:
   icon: {fileID: 21300078, guid: 4b00c4fcb1be91245b2dab5149c61c5d, type: 3}
   description: MagicWand deal 3-5 damage to monster.
   maxStackSize: 1
+  pickupPrefab: {fileID: 7551886329549488357, guid: afd17ab6fa8d70046bf1e7e9e012ac95, type: 3}
