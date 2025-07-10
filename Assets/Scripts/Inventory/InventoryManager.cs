@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Linq;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -104,7 +105,7 @@ public class InventoryManager : MonoBehaviour
         // New UI on swap
         OnInventoryChanged?.Invoke();
     }
-    
+
     public void RemoveItem(int slotIndex, int amountToRemove)
     {
         if (slotIndex < 0 || slotIndex >= inventorySlots.Count) return;
@@ -116,8 +117,43 @@ public class InventoryManager : MonoBehaviour
         {
             slot.itemData = null;
             slot.quantity = 0;
-        }        
+        }
         Debug.Log($"Removed {amountToRemove} of {itemName} from slot {slotIndex}");
         OnInventoryChanged?.Invoke();
+    }
+    
+    public bool HasItems(List<Ingredient> ingredients)
+    {
+        foreach (var ingredient in ingredients)
+        {
+            int count = inventorySlots
+                .Where(s => s.itemData == ingredient.item)
+                .Sum(s => s.quantity);
+            if (count < ingredient.quantity)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    public void RemoveItems(List<Ingredient> ingredients)
+    {
+        foreach (var ingredient in ingredients)
+        {
+            int amountToRemove = ingredient.quantity;
+            for (int i = 0; i < inventorySlots.Count; i++)
+            {
+                if (inventorySlots[i].itemData == ingredient.item)
+                {
+                    int amountInSlot = inventorySlots[i].quantity;
+                    int amountRemoved = Mathf.Min(amountToRemove, amountInSlot);
+
+                    RemoveItem(i, amountRemoved);
+                    amountToRemove -= amountRemoved;
+
+                    if (amountToRemove <= 0) break; 
+                }
+            }
+        }
     }
 }

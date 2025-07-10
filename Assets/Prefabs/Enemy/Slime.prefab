@@ -196,7 +196,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   detectionRange: 8
-  attackRange: 1.2
   contactDamage: 10
   smallSlimePrefab: {fileID: 6140372402498242876, guid: 555a64404aa726b438df07cf349a0940, type: 3}
   splitCount: 2
