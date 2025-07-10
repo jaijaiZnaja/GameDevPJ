@@ -1,18 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DragItem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static DragItem Instance { get; private set; }
+
+    [SerializeField] private Image itemIcon;
+    private RectTransform rectTransform;
+
+    private void Awake()
     {
-        
+        Instance = this;
+        rectTransform = GetComponent<RectTransform>();
+        HideIcon();
     }
 
-    // Update is called once per frame
+    public void ShowIcon(Sprite sprite)
+    {
+        itemIcon.sprite = sprite;
+        itemIcon.enabled = true;
+        gameObject.SetActive(true);
+    }
+
+    public void HideIcon()
+    {
+        gameObject.SetActive(false);
+    }
+
     void Update()
     {
-        
+
+        if (gameObject.activeSelf)
+        {
+            rectTransform.position = Input.mousePosition;
+        }
     }
+
 }
+

@@ -3,58 +3,83 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
-public class UI_InventorySlot : MonoBehaviour
+public class UI_InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
     [Header("UI Elements")]
     [SerializeField] public Image icon;
     [SerializeField] public TextMeshProUGUI quantityText;
-    [SerializeField] public GameObject selector;
+
+    [Header("Selection Visuals")]
+    [SerializeField] private Image selectionIndicator;
+    public int SlotIndex { get; private set; }
+
+    public void Initialize(int index) 
+    {
+        SlotIndex = index;
+    }
 
     private void Awake()
     {
-        if (selector != null)
-        {
-            selector.SetActive(false);
-        }
+        SetSelected(false); 
     }
 
     public void UpdateSlot(InventorySlot slot)
     {
         if (slot.itemData != null && slot.quantity > 0)
         {
-            // Update icon
             icon.sprite = slot.itemData.icon;
             icon.enabled = true;
-
-            if (slot.quantity > 1)
-            {
-                quantityText.text = slot.quantity.ToString();
-                quantityText.enabled = true;
-            }
-            else
-            {
-                quantityText.enabled = false;
-            }
+            quantityText.enabled = slot.quantity > 1;
+            quantityText.text = slot.quantity.ToString();
         }
         else
         {
-            // empty slot
             icon.sprite = null;
             icon.enabled = false;
             quantityText.enabled = false;
         }
     }
 
-    //select visibility
-
     public void SetSelected(bool isSelected)
     {
-        if (selector != null)
+        if (selectionIndicator != null)
         {
-            selector.SetActive(isSelected);
+            selectionIndicator.enabled = isSelected;
         }
     }
 
+    //  Drag and Drop Logic 
 
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        if (InventoryManager.Instance.inventorySlots[SlotIndex].itemData != null && eventData.button == PointerEventData.InputButton.Left)
+        {
+            DragItem.Instance.ShowIcon(icon.sprite); // แสดงไอเทมที่กำลังลาก
+            icon.enabled = false; // ซ่อนไอคอนที่ช่องเดิม
+            quantityText.enabled = false;
+        }
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        DragItem.Instance.HideIcon(); 
+        UpdateSlot(InventoryManager.Instance.inventorySlots[SlotIndex]); 
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        UI_InventorySlot sourceSlot = eventData.pointerDrag.GetComponent<UI_InventorySlot>();
+
+        if (sourceSlot != null && sourceSlot != this)
+        {
+            InventoryManager.Instance.SwapSlots(sourceSlot.SlotIndex, this.SlotIndex);
+        }
+    }
 }

@@ -40,16 +40,19 @@ public class UI_InventoryPanel : MonoBehaviour
         {
             if (i < InventoryManager.Instance.inventorySlots.Count)
             {
-                GameObject newSlot = Instantiate(slotPrefab, hotbarContainer);
-                hotbarSlots.Add(newSlot.GetComponent<UI_InventorySlot>());
+                GameObject newSlotGO = Instantiate(slotPrefab, hotbarContainer);
+                UI_InventorySlot newSlot = newSlotGO.GetComponent<UI_InventorySlot>();
+                newSlot.Initialize(i); 
+                hotbarSlots.Add(newSlot);
             }
         }
-
         //Inventory
         for (int i = 10; i < InventoryManager.Instance.inventorySlots.Count; i++)
         {
-            GameObject newSlot = Instantiate(slotPrefab, mainInventoryContainer);
-            mainSlots.Add(newSlot.GetComponent<UI_InventorySlot>());
+            GameObject newSlotGO = Instantiate(slotPrefab, mainInventoryContainer);
+            UI_InventorySlot newSlot = newSlotGO.GetComponent<UI_InventorySlot>();
+            newSlot.Initialize(i); 
+            mainSlots.Add(newSlot);
         }
     }
 
